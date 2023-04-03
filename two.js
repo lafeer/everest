@@ -69,4 +69,36 @@ function calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed) {
 // create array of current time for each vehicle
 const vehiclesCurrentTime = Array.from({ length: numOfVehicles }, () => 0);
 
+for (const shipment of shipments) {
+  // find vehicle with earliest return time
+  let firstVehichleTimeToReturnIndex = vehiclesCurrentTime.indexOf(
+    Math.min(...vehiclesCurrentTime)
+  );
+
+  // add delivery time for each package in shipment
+  shipment.forEach((pkg) => {
+    pkg.deliveryTime = parseFloat(
+      calculatePkgDeliveryTime(
+        pkg,
+        vehiclesCurrentTime[firstVehichleTimeToReturnIndex],
+        maxSpeed
+      ).toFixed(2)
+    );
+  });
+
+  // calculate delivery time for shipment
+  const shipmentDeliveryTime = Math.max(
+    ...shipment.map((pkg) => pkg.deliveryTime)
+  );
+  const shipmentDeliveryReturnTime = shipmentDeliveryTime * 2;
+
+  // update vehicle return time
+  vehiclesCurrentTime[firstVehichleTimeToReturnIndex] +=
+    shipmentDeliveryReturnTime;
+}
+
+packages.forEach((pkg) =>
+  console.log(pkg.pkgId, pkg.discount, pkg.pkgCost, pkg.deliveryTime)
+);
+
 module.exports = { groupPackages, sortShipments, calculatePkgDeliveryTime };
