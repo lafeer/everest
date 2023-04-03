@@ -58,3 +58,10 @@ function sortShipments(a, b) {
 const shipments = groupPackages(sortedPackages, maxCarriableWeight).sort(
   sortShipments
 );
+
+// calculate delivery time for each package in each shipment
+function calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed) {
+  return (
+    vehicleCurrentTime + Math.floor((pkg.pkgDistance / maxSpeed) * 100) / 100
+  );
+}
