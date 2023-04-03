@@ -42,3 +42,19 @@ function groupPackages(packages, maxCarriableWeight) {
   shipments.push(currentGroup);
   return shipments;
 }
+
+// sort shipments by number of packages, then weight, descending
+function sortShipments(a, b) {
+  if (a.length === b.length) {
+    return (
+      b.reduce((acc, pkg) => acc + pkg.pkgWeight, 0) -
+      a.reduce((acc, pkg) => acc + pkg.pkgWeight, 0)
+    );
+  } else {
+    return b.length - a.length;
+  }
+}
+
+const shipments = groupPackages(sortedPackages, maxCarriableWeight).sort(
+  sortShipments
+);
