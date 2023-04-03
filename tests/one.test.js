@@ -74,4 +74,32 @@ describe("calculatePackageCostsAndDiscounts", () => {
       },
     ]);
   });
+
+  test("calculates correct delivery cost with discount OFR002", () => {
+    const baseDeliveryCost = 100;
+    const packages = [
+      {
+        pkgId: "PKG2",
+        pkgWeight: 150,
+        pkgDistance: 100,
+        offerCode: "OFR002",
+      },
+    ];
+
+    const result = calculatePackageCostsAndDiscounts(
+      packages,
+      baseDeliveryCost
+    );
+
+    expect(result).toEqual([
+      {
+        pkgId: "PKG2",
+        pkgWeight: 150,
+        pkgDistance: 100,
+        pkgCost: 1953,
+        discount: 147,
+        offerCode: "OFR002",
+      },
+    ]);
+  });
 });
