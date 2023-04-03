@@ -21,3 +21,24 @@ const packages = calculatePackageCostsAndDiscounts(
 
 // sort packages by weight, descending
 const sortedPackages = [...packages].sort((a, b) => b.pkgWeight - a.pkgWeight);
+
+// group packages into shipments
+function groupPackages(packages, maxCarriableWeight) {
+  const shipments = [];
+  let currentGroup = [];
+  let currentWeight = 0;
+
+  for (const pkg of packages) {
+    if (currentWeight + pkg.pkgWeight < maxCarriableWeight) {
+      currentGroup.push(pkg);
+      currentWeight += pkg.pkgWeight;
+    } else {
+      shipments.push(currentGroup);
+      currentGroup = [pkg];
+      currentWeight = pkg.pkgWeight;
+    }
+  }
+
+  shipments.push(currentGroup);
+  return shipments;
+}
