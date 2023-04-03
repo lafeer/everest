@@ -1,4 +1,8 @@
-const { groupPackages, sortShipments } = require("../two.js");
+const {
+  groupPackages,
+  sortShipments,
+  calculatePkgDeliveryTime,
+} = require("../two.js");
 
 const groupedPackages = [
   [
@@ -161,5 +165,56 @@ describe("group packages into shipments and calculates package delivery times", 
         },
       ],
     ]);
+  });
+
+  test("calculatePkgDeliveryTime1", () => {
+    const maxSpeed = 70;
+    const vehicleCurrentTime = 0;
+    const pkg = {
+      pkgId: "PKG4",
+      pkgWeight: 110,
+      pkgDistance: 60,
+      offerCode: "OFR002",
+      discount: 105,
+      pkgCost: 1395,
+    };
+
+    const result = calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed);
+
+    expect(result).toEqual(0.85);
+  });
+
+  test("calculatePkgDeliveryTime2", () => {
+    const maxSpeed = 70;
+    const vehicleCurrentTime = 3.56;
+    const pkg = {
+      pkgId: "PKG1",
+      pkgWeight: 50,
+      pkgDistance: 30,
+      offerCode: "OFR001",
+      discount: 0,
+      pkgCost: 750,
+    };
+
+    const result = calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed);
+
+    expect(result).toEqual(3.98);
+  });
+
+  test("calculateAllPkgDeliveryTimes", () => {
+    const maxSpeed = 70;
+    const pkg = {
+      pkgId: "PKG1",
+      pkgWeight: 50,
+      pkgDistance: 30,
+      offerCode: "OFR001",
+      discount: 0,
+      pkgCost: 750,
+    };
+
+    const vehicleCurrentTime = 3.56;
+    const result = calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed);
+
+    expect(result).toEqual(3.98);
   });
 });

@@ -65,3 +65,5 @@ function calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed) {
     vehicleCurrentTime + Math.floor((pkg.pkgDistance / maxSpeed) * 100) / 100
   );
 }
+
+module.exports = { groupPackages, sortShipments, calculatePkgDeliveryTime };
