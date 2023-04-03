@@ -1,0 +1,22 @@
+{
+  "name": "everest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "one.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lafeer/everest.git"
+  },
+  "author": "Ahmed Lafeer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lafeer/everest/issues"
+  },
+  "homepage": "https://github.com/lafeer/everest#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
