@@ -131,4 +131,66 @@ describe("calculatePackageCostsAndDiscounts", () => {
       },
     ]);
   });
+
+  test("calculates correct delivery cost for multiple packages", () => {
+    const baseDeliveryCost = 100;
+    const packages = [
+      {
+        pkgId: "PKG1",
+        pkgWeight: 100,
+        pkgDistance: 150,
+        pkgCost: 1665,
+        discount: 185,
+        offerCode: "OFR001",
+      },
+      {
+        pkgId: "PKG2",
+        pkgWeight: 150,
+        pkgDistance: 100,
+        pkgCost: 1953,
+        discount: 147,
+        offerCode: "OFR002",
+      },
+      {
+        pkgId: "PKG3",
+        pkgWeight: 50,
+        pkgDistance: 200,
+        pkgCost: 1520,
+        discount: 80,
+        offerCode: "OFR003",
+      },
+    ];
+
+    const result = calculatePackageCostsAndDiscounts(
+      packages,
+      baseDeliveryCost
+    );
+
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBe(3);
+    expect(result[0]).toEqual({
+      pkgId: "PKG1",
+      pkgWeight: 100,
+      pkgDistance: 150,
+      pkgCost: 1665,
+      discount: 185,
+      offerCode: "OFR001",
+    });
+    expect(result[1]).toEqual({
+      pkgId: "PKG2",
+      pkgWeight: 150,
+      pkgDistance: 100,
+      pkgCost: 1953,
+      discount: 147,
+      offerCode: "OFR002",
+    });
+    expect(result[2]).toEqual({
+      pkgId: "PKG3",
+      pkgWeight: 50,
+      pkgDistance: 200,
+      pkgCost: 1520,
+      discount: 80,
+      offerCode: "OFR003",
+    });
+  });
 });
