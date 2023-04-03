@@ -66,4 +66,7 @@ function calculatePkgDeliveryTime(pkg, vehicleCurrentTime, maxSpeed) {
   );
 }
 
+// create array of current time for each vehicle
+const vehiclesCurrentTime = Array.from({ length: numOfVehicles }, () => 0);
+
 module.exports = { groupPackages, sortShipments, calculatePkgDeliveryTime };
