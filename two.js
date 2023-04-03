@@ -9,3 +9,6 @@ const [...packageDetails] = process.argv.slice(4, -3);
 const [numOfVehicles, maxSpeed, maxCarriableWeight] = process.argv
   .slice(-3)
   .map(Number);
+
+// parse package details into package objects
+const packageObjects = createPackageObjects(packageDetails, numOfPackages);
