@@ -12,3 +12,9 @@ const [numOfVehicles, maxSpeed, maxCarriableWeight] = process.argv
 
 // parse package details into package objects
 const packageObjects = createPackageObjects(packageDetails, numOfPackages);
+
+// calculate package costs and discounts
+const packages = calculatePackageCostsAndDiscounts(
+  packageObjects,
+  baseDeliveryCost
+);
