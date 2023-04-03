@@ -18,3 +18,6 @@ const packages = calculatePackageCostsAndDiscounts(
   packageObjects,
   baseDeliveryCost
 );
+
+// sort packages by weight, descending
+const sortedPackages = [...packages].sort((a, b) => b.pkgWeight - a.pkgWeight);
