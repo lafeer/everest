@@ -1,4 +1,7 @@
-const { createPackageObjects } = require("../utils.js");
+const {
+  createPackageObjects,
+  calculatePackageCostsAndDiscounts,
+} = require("../utils.js");
 
 describe("createPackageObjects", () => {
   test("createPackageObjects creates package objects correctly", () => {
@@ -40,5 +43,35 @@ describe("createPackageObjects", () => {
       pkgDistance: 100,
       offerCode: "OFR003",
     });
+  });
+});
+
+describe("calculatePackageCostsAndDiscounts", () => {
+  test("calculates correct delivery cost with discount OFR001", () => {
+    const baseDeliveryCost = 100;
+    const packages = [
+      {
+        pkgId: "PKG1",
+        pkgWeight: 100,
+        pkgDistance: 150,
+        offerCode: "OFR001",
+      },
+    ];
+
+    const result = calculatePackageCostsAndDiscounts(
+      packages,
+      baseDeliveryCost
+    );
+
+    expect(result).toEqual([
+      {
+        pkgId: "PKG1",
+        pkgWeight: 100,
+        pkgDistance: 150,
+        pkgCost: 1665,
+        discount: 185,
+        offerCode: "OFR001",
+      },
+    ]);
   });
 });
